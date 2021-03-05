@@ -8,7 +8,7 @@ export const Game = () => {
   const [ xIsNext, setXIsNext ] = useState(true);
 
   const handleClick = (i) => {
-    const history = checkHistory.slice(0, stepNumber + 1);
+    const history = getHistory.slice(0, stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if(calculateWinner(squares) || squares[i]) {
@@ -32,13 +32,15 @@ export const Game = () => {
     setXIsNext(NewXIxNext);
   }
 
-  const checkHistory = history;
-  const current = checkHistory[stepNumber];
+  const getHistory = history;
+  const current = getHistory[stepNumber];
   const winner = calculateWinner(current.squares);
 
-  const moves = checkHistory.map((step, move) => {
+  const moves = getHistory.map((step, move) => {
+    const col = i % 3 + 1;
+    const row = Math.floor(i / 3) + 1;
     const desc = move ?
-      move + '番目に戻る' :
+      move + `番目に戻る(col:${col} row${row})`:
       'スタートに戻る';
       return (
         <li key={move}>
