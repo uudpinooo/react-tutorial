@@ -37,10 +37,8 @@ export const Game = () => {
   const winner = calculateWinner(current.squares);
 
   const moves = getHistory.map((step, move) => {
-    const col = i % 3 + 1;
-    const row = Math.floor(i / 3) + 1;
     const desc = move ?
-      move + `番目に戻る(col:${col} row${row})`:
+      move + '番目に戻る':
       'スタートに戻る';
       return (
         <li key={move}>
